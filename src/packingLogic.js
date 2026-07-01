@@ -1,8 +1,8 @@
 export const PREDEFINED_BOXES = [
-  { name: 'BOX Logimat A2', dimensions: [10, 17, 8] },
-  { name: 'BOX Logimat A3', dimensions: [21, 17, 8] },
-  { name: 'BOX Logimat B4', dimensions: [32, 17, 18] },
-  { name: 'BOX Logimat B5', dimensions: [43, 17, 18] }
+  { name: 'BOX Logimat A2', dimensions: [10, 8, 17] },
+  { name: 'BOX Logimat A3', dimensions: [21, 8, 17] },
+  { name: 'BOX Logimat B4', dimensions: [32, 18, 17] },
+  { name: 'BOX Logimat B5', dimensions: [43, 18, 17] }
 ];
 
 function getOrientations(itemDims) {
