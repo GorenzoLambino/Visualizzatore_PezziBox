@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Scene3D } from './Scene3D'
-import { calculatePacking, PREDEFINED_BOXES } from './packingLogic'
+import { calculatePacking, PREDEFINED_BOXES, ARRIVI_BOXES } from './packingLogic'
 import './index.css'
 
 function BoxCard({ boxInfo, itemDims, isMixed }) {
@@ -34,8 +34,14 @@ function BoxCard({ boxInfo, itemDims, isMixed }) {
 
 function App() {
   const [itemDims, setItemDims] = useState([9.4, 5.2, 6.2])
+  const [department, setDepartment] = useState('LOGIMAT')
   const [boxes, setBoxes] = useState(PREDEFINED_BOXES)
   const [isMixed, setIsMixed] = useState(false)
+
+  const handleDepartmentChange = (dept) => {
+    setDepartment(dept)
+    setBoxes(dept === 'LOGIMAT' ? PREDEFINED_BOXES : ARRIVI_BOXES)
+  }
 
   const updateItem = (index, value) => {
     const newDims = [...itemDims]
@@ -58,6 +64,31 @@ function App() {
       </header>
       
       <main>
+        <div className="department-selector" style={{ display: 'flex', justifyContent: 'center', gap: '15px', padding: '15px', background: '#1e1e1e', borderRadius: '12px', marginBottom: '20px', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
+          <button 
+            className={`dept-btn ${department === 'LOGIMAT' ? 'active' : ''}`}
+            onClick={() => handleDepartmentChange('LOGIMAT')}
+            style={{ 
+              padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', border: 'none', 
+              background: department === 'LOGIMAT' ? '#4444ff' : '#2a2a2a', 
+              color: 'white', fontWeight: 'bold', fontSize: '16px', transition: '0.2s' 
+            }}
+          >
+            📦 Magazzino LOGIMAT
+          </button>
+          <button 
+            className={`dept-btn ${department === 'ARRIVI' ? 'active' : ''}`}
+            onClick={() => handleDepartmentChange('ARRIVI')}
+            style={{ 
+              padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', border: 'none', 
+              background: department === 'ARRIVI' ? '#4444ff' : '#2a2a2a', 
+              color: 'white', fontWeight: 'bold', fontSize: '16px', transition: '0.2s' 
+            }}
+          >
+            🚚 Reparto Arrivi
+          </button>
+        </div>
+
         <div className="item-controls top-controls">
           <h3>Dimensioni Confezione (Oggetto)</h3>
           

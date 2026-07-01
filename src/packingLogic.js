@@ -5,6 +5,10 @@ export const PREDEFINED_BOXES = [
   { name: 'BOX Logimat B5', dimensions: [43, 18, 17] }
 ];
 
+export const ARRIVI_BOXES = [
+  { name: 'Cassa Grigia', dimensions: [19, 35, 55] }
+];
+
 function getOrientations(itemDims) {
   const [ix, iy, iz] = itemDims;
   return [
