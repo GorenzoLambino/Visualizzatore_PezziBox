@@ -6,7 +6,7 @@ export const PREDEFINED_BOXES = [
 ];
 
 export const ARRIVI_BOXES = [
-  { name: 'Cassa Grigia', dimensions: [19, 35, 55] }
+  { name: 'Cassa Grigia', dimensions: [35, 19, 55] }
 ];
 
 function getOrientations(itemDims) {
