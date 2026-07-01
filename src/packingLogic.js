@@ -1,8 +1,8 @@
 export const PREDEFINED_BOXES = [
-  { name: 'BOX Logimat A2', dimensions: [10, 8, 17] },
-  { name: 'BOX Logimat A3', dimensions: [21, 8, 17] },
-  { name: 'BOX Logimat B4', dimensions: [32, 18, 17] },
-  { name: 'BOX Logimat B5', dimensions: [43, 18, 17] }
+  { name: 'BOX Logimat A2', dimensions: [10, 10, 17] },
+  { name: 'BOX Logimat A3', dimensions: [21, 10, 17] },
+  { name: 'BOX Logimat B4', dimensions: [32, 20, 17] },
+  { name: 'BOX Logimat B5', dimensions: [43, 20, 17] }
 ];
 
 export const ARRIVI_BOXES = [
