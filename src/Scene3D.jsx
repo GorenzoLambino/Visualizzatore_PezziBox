@@ -26,8 +26,8 @@ export function Scene3D({ boxDims, items }) {
       {items.map((item, index) => (
         <mesh key={index} position={item.position}>
           <boxGeometry args={item.size} />
-          <meshStandardMaterial color="#3b82f6" opacity={0.8} transparent />
-          <Edges scale={1} threshold={15} color="#1d4ed8" />
+          <meshStandardMaterial color="#a4ccdc" opacity={0.8} transparent />
+          <Edges scale={1} threshold={15} color="#4386a2" />
         </mesh>
       ))}
 

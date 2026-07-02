@@ -1,10 +1,14 @@
 :root {
-  --bg-color: #121212;
-  --panel-bg: #1e1e1e;
-  --text-color: #f3f4f6;
-  --text-muted: #9ca3af;
-  --border-color: #374151;
-  --accent-color: #3b82f6;
+  --bg-color: #f8f9fa;
+  --panel-bg: #ffffff;
+  --text-color: #212529;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --accent-color: #4386a2;
+  --header-bg: #a0c2d0;
+  --btn-primary: #a4ccdc;
+  --btn-hover: #4386a2;
+  --btn-active: #e85861;
 }
 
 body {
@@ -13,6 +17,16 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --panel-bg: #1e1e1e;
+  --text-color: #f3f4f6;
+  --text-muted: #9ca3af;
+  --border-color: #374151;
+  /* I bottoni e l'header usano lo stesso azzurro AS400 del tema chiaro */
 }
 
 .app-container {
@@ -25,11 +39,22 @@ body {
   box-sizing: border-box;
 }
 
+header {
+  background-color: var(--header-bg);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 header h1 {
   margin-top: 0;
+  margin-bottom: 0;
   font-weight: 500;
   font-size: 1.5rem;
   text-align: center;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 main {
@@ -46,6 +71,7 @@ main {
   border-radius: 12px;
   border: 1px solid var(--border-color);
   text-align: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .top-controls h3 {
@@ -83,7 +109,7 @@ main {
 
 .number-input {
   width: 60px;
-  background-color: var(--bg-color);
+  background-color: var(--panel-bg);
   color: var(--text-color);
   border: 1px solid var(--border-color);
   border-radius: 6px;
@@ -92,12 +118,43 @@ main {
   font-family: monospace;
 }
 
+/* --- Nuove classi per bottoni --- */
+.dept-btn {
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-bg);
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.dept-btn:hover {
+  background-color: var(--btn-primary);
+  color: #fff;
+  border-color: #fff;
+}
+
+.dept-btn.active {
+  background-color: var(--btn-hover);
+  color: #fff;
+  border-color: #fff;
+}
+
+/* Colori Indicatori Dimensioni */
+.color-x { color: #dc3545; font-weight: bold; }
+.color-y { color: #28a745; font-weight: bold; }
+.color-z { color: #007bff; font-weight: bold; }
+
 /* --- Boxes Settings Accordion --- */
 .boxes-settings {
   background-color: var(--panel-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 16px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .boxes-settings summary {
@@ -158,6 +215,7 @@ main {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .box-header {

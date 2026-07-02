@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Scene3D } from './Scene3D'
 import { calculatePacking, PREDEFINED_BOXES, ARRIVI_BOXES } from './packingLogic'
 import './index.css'
@@ -37,6 +37,15 @@ function App() {
   const [department, setDepartment] = useState('LOGIMAT')
   const [boxes, setBoxes] = useState(PREDEFINED_BOXES)
   const [isMixed, setIsMixed] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode')
+    } else {
+      document.body.classList.remove('dark-mode')
+    }
+  }, [isDarkMode])
 
   const handleDepartmentChange = (dept) => {
     setDepartment(dept)
@@ -59,31 +68,32 @@ function App() {
 
   return (
     <div className="app-container">
-      <header>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ width: '120px' }}></div> {/* Spacer per centrare l'h1 */}
         <h1>Visualizzatore Bin Packing 3D - Multi-Box</h1>
+        <button 
+          onClick={() => setIsDarkMode(!isDarkMode)}
+          style={{
+            background: 'none', border: '1px solid #fff', color: '#fff', 
+            padding: '6px 12px', borderRadius: '4px', cursor: 'pointer',
+            width: '120px', fontSize: '0.9rem'
+          }}
+        >
+          {isDarkMode ? '☀️ Chiaro' : '🌙 Scuro'}
+        </button>
       </header>
       
       <main>
-        <div className="department-selector" style={{ display: 'flex', justifyContent: 'center', gap: '15px', padding: '15px', background: '#1e1e1e', borderRadius: '12px', marginBottom: '20px', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
+        <div className="department-selector" style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '20px' }}>
           <button 
             className={`dept-btn ${department === 'LOGIMAT' ? 'active' : ''}`}
             onClick={() => handleDepartmentChange('LOGIMAT')}
-            style={{ 
-              padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', border: 'none', 
-              background: department === 'LOGIMAT' ? '#4444ff' : '#2a2a2a', 
-              color: 'white', fontWeight: 'bold', fontSize: '16px', transition: '0.2s' 
-            }}
           >
             📦 Magazzino LOGIMAT
           </button>
           <button 
             className={`dept-btn ${department === 'ARRIVI' ? 'active' : ''}`}
             onClick={() => handleDepartmentChange('ARRIVI')}
-            style={{ 
-              padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', border: 'none', 
-              background: department === 'ARRIVI' ? '#4444ff' : '#2a2a2a', 
-              color: 'white', fontWeight: 'bold', fontSize: '16px', transition: '0.2s' 
-            }}
           >
             🚚 Reparto Arrivi
           </button>
@@ -106,17 +116,17 @@ function App() {
 
           <div className="slider-row">
             <div className="slider-group">
-              <label><span style={{color: '#ff4444'}}>■</span> Lunghezza (X)</label>
+              <label><span className="color-x">■</span> Lunghezza (X)</label>
               <input type="range" min="0.1" max="50" step="0.1" value={itemDims[0]} onChange={(e) => updateItem(0, e.target.value)} />
               <input type="number" step="0.1" value={itemDims[0]} onChange={(e) => updateItem(0, e.target.value)} className="number-input" />
             </div>
             <div className="slider-group">
-              <label><span style={{color: '#00ff00'}}>■</span> Altezza (Y)</label>
+              <label><span className="color-y">■</span> Altezza (Y)</label>
               <input type="range" min="0.1" max="50" step="0.1" value={itemDims[1]} onChange={(e) => updateItem(1, e.target.value)} />
               <input type="number" step="0.1" value={itemDims[1]} onChange={(e) => updateItem(1, e.target.value)} className="number-input" />
             </div>
             <div className="slider-group">
-              <label><span style={{color: '#4444ff'}}>■</span> Profondità (Z)</label>
+              <label><span className="color-z">■</span> Profondità (Z)</label>
               <input type="range" min="0.1" max="50" step="0.1" value={itemDims[2]} onChange={(e) => updateItem(2, e.target.value)} />
               <input type="number" step="0.1" value={itemDims[2]} onChange={(e) => updateItem(2, e.target.value)} className="number-input" />
             </div>
@@ -130,15 +140,15 @@ function App() {
               <div key={bIdx} className="box-setting-row">
                 <span className="box-name">{box.name}</span>
                 <div className="input-group">
-                  <label><span style={{color: '#ff4444'}}>■</span> L:</label>
+                  <label><span className="color-x">■</span> L:</label>
                   <input type="number" step="1" value={box.dimensions[0]} onChange={(e) => updateBoxDim(bIdx, 0, e.target.value)} className="number-input" />
                 </div>
                 <div className="input-group">
-                  <label><span style={{color: '#00ff00'}}>■</span> A:</label>
+                  <label><span className="color-y">■</span> A:</label>
                   <input type="number" step="1" value={box.dimensions[1]} onChange={(e) => updateBoxDim(bIdx, 1, e.target.value)} className="number-input" />
                 </div>
                 <div className="input-group">
-                  <label><span style={{color: '#4444ff'}}>■</span> P:</label>
+                  <label><span className="color-z">■</span> P:</label>
                   <input type="number" step="1" value={box.dimensions[2]} onChange={(e) => updateBoxDim(bIdx, 2, e.target.value)} className="number-input" />
                 </div>
               </div>
